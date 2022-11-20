@@ -6,7 +6,7 @@ const targetWords = [
     "ABLE",
     "ACID",
     "ALSO",
-    "AMRY",
+    "ARMY",
     "AREA",
     "AXIS",
     "BABY",
