@@ -1,6 +1,6 @@
-const tileDisplay = document.querySelector('.tile-container')
+const tiles = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.key-container')
-const messageDisplay = document.querySelector('.message-container')
+const alertContainer = document.querySelector('.message-container')
 
 const targetWords = [
     "ABLE",
@@ -104,7 +104,7 @@ const targetWords = [
     "YEAR",
     "ZOOM"
   ]
-  const dictionary = [
+const dictionary = [
     "ABET",
     "ABLE",
     "ABLY",
@@ -2205,7 +2205,7 @@ const targetWords = [
     "ZOOS"
   ]
 
-let wordle = targetWords[Math.floor(Math.random()*99)]
+let targetWord = targetWords[Math.floor(Math.random()*99)]
 
 const keys = [
     'Q',
@@ -2250,23 +2250,23 @@ let currentTile = 0
 let isGameOver = false
 
 guessRows.forEach((guessRow, guessRowIndex) => {
-    const rowElement = document.createElement('div')
-    rowElement.setAttribute('id', 'guessRow-' + guessRowIndex)
+    const rows = document.createElement('div')
+    rows.setAttribute('id', 'guessRow-' + guessRowIndex)
     guessRow.forEach((_guess, guessIndex) => {
-        const tileElement = document.createElement('div')
-        tileElement.setAttribute('id', 'guessRow-' + guessRowIndex + '-tile-' + guessIndex)
-        tileElement.classList.add('tile')
-        rowElement.append(tileElement)
+        const tile = document.createElement('div')
+        tile.setAttribute('id', 'guessRow-' + guessRowIndex + '-tile-' + guessIndex)
+        tile.classList.add('tile')
+        rows.append(tile)
     })
-    tileDisplay.append(rowElement)
+    tiles.append(rows)
 })
 
 keys.forEach(key => {
-    const buttonElement = document.createElement('button')
-    buttonElement.textContent = key
-    buttonElement.setAttribute('id', key)
-    buttonElement.addEventListener('click', () => handleClick(key))
-    keyboard.append(buttonElement)
+    const button = document.createElement('button')
+    button.textContent = key
+    button.setAttribute('id', key)
+    button.addEventListener('click', () => handleClick(key))
+    keyboard.append(button)
 })
 
 const handleClick = (letter) => {
@@ -2312,7 +2312,7 @@ const submitGuess = () => {
         }
         else {
             flipTile()
-            if(wordle == guess) {
+            if(targetWord == guess) {
                 showAlert("You Win", true)
                 isGameOver = true
                 return
@@ -2321,7 +2321,7 @@ const submitGuess = () => {
                 if(currentRow >= 4) {
                     isGameOver = true
                     setTimeout(() => {
-                        showAlert(wordle, true)
+                        showAlert(targetWord, true)
                     }, 2000);
                     return
                 }
@@ -2336,11 +2336,11 @@ const submitGuess = () => {
 }
 
 const showAlert = (message, isFinal) => {
-    const messageElement = document.createElement('p')
-    messageElement.textContent = message
-    messageDisplay.append(messageElement)
-    if(!isFinal) setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
-    else setTimeout(() => messageDisplay.removeChild(messageElement), 5000)
+    const alert = document.createElement('p')
+    alert.textContent = message
+    messageDisplay.append(alert)
+    if(!isFinal) setTimeout(() => messageDisplay.removeChild(alert), 2000)
+    else setTimeout(() => messageDisplay.removeChild(alert), 5000)
 }
 
 const coloring = (keyLetter, color) => {
@@ -2350,7 +2350,7 @@ const coloring = (keyLetter, color) => {
 
 const flipTile = () => {
     const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
-    let checkWordle = wordle
+    let checkWord = targetWord
     const guess = []
 
     rowTiles.forEach(tile => {
@@ -2358,16 +2358,16 @@ const flipTile = () => {
     })
 
     guess.forEach((guess, index) => {
-        if (guess.letter == wordle[index]) {
+        if (guess.letter == targetWord[index]) {
             guess.color = 'green-overlay'
-            checkWordle = checkWordle.replace(guess.letter, '')
+            checkWord = checkWord.replace(guess.letter, '')
         }
     })
 
     guess.forEach(guess => {
-        if (checkWordle.includes(guess.letter)) {
+        if (checkWord.includes(guess.letter)) {
             guess.color = 'yellow-overlay'
-            checkWordle = checkWordle.replace(guess.letter, '')
+            checkWord = checkWord.replace(guess.letter, '')
         }
     })
 
@@ -2379,4 +2379,3 @@ const flipTile = () => {
         }, (500 * index)/2)
     })
 }
-
