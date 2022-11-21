@@ -2338,9 +2338,9 @@ const submitGuess = () => {
 const showAlert = (message, isFinal) => {
     const alert = document.createElement('p')
     alert.textContent = message
-    messageDisplay.append(alert)
-    if(!isFinal) setTimeout(() => messageDisplay.removeChild(alert), 2000)
-    else setTimeout(() => messageDisplay.removeChild(alert), 5000)
+    alertContainer.append(alert)
+    if(!isFinal) setTimeout(() => alertContainer.removeChild(alert), 2000)
+    else setTimeout(() => alertContainer.removeChild(alert), 5000)
 }
 
 const coloring = (keyLetter, color) => {
