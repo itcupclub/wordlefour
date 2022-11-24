@@ -7,6 +7,7 @@ const targetWords = [
     "ACID",
     "ALSO",
     "ARMY",
+    "AREA",
     "AXIS",
     "BACK",
     "BALD",
@@ -71,7 +72,6 @@ const targetWords = [
     "ROAD",
     "SAND",
     "TAKE",
-    "TEST",
     "THIS",
     "TIME",
     "VIEW",
@@ -82,6 +82,28 @@ const targetWords = [
     "WITH",
     "WORD",
     "YEAR",
+    // extra 21 words
+    "OVER",
+    "RATE",
+    "ZONE",
+    "SYNC",
+    "SONG",
+    "BAIT",
+    "CARE",
+    "DOPE",
+    "BALD",
+    "FIRE",
+    "REAL",
+    "GIFT",
+    "PLAN",
+    "POSE",
+    "PILE",
+    "WAVE",
+    "URGE",
+    "HERB",
+    "HOLE",
+    "LAMB",
+    "ROPE"
   ]
 const dictionary = [
     "ABET",
@@ -2184,7 +2206,7 @@ const dictionary = [
     "ZOOS"
   ]
 
-let targetWord = targetWords[Math.floor(Math.random()*78)]
+let targetWord = targetWords[Math.floor(Math.random()*99)]
 
 const keys = [
     'Q',
@@ -2292,7 +2314,9 @@ const submitGuess = () => {
         else {
             flipTile()
             if(targetWord == guess) {
-                showAlert("You Win", true)
+                setTimeout(() => {
+                    showAlert("You Win", true)
+                }, 2000)
                 isGameOver = true
                 return
             }
